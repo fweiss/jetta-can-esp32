@@ -43,12 +43,15 @@ static void can_receive_task(void *arg) {
     vTaskDelete(NULL);
 }
 
+// fixme run at timer
 static void can_transmit_task(void *arg) {
     while (1) {
         ESP_LOGI(EXAMPLE_TAG, "sending tach");
-        uint16_t rpm = 2000 * 4;
-        tach_message.data[2] = rpm & 0xff;
-        tach_message.data[3] = rpm >> 8;
+
+        const uint16_t rpm = 2000;
+        uint16_t scaledRpm = rpm * 4;
+        tach_message.data[2] = scaledRpm & 0xff;
+        tach_message.data[3] = scaledRpm >> 8;
         can_transmit(&tach_message, portMAX_DELAY);
         vTaskDelay(pdMS_TO_TICKS(PING_PERIOD_MS));
     }
