@@ -62,9 +62,10 @@ void app_main()
     ESP_LOGI(EXAMPLE_TAG, "Driver installed");
     ESP_ERROR_CHECK(can_start());
     ESP_LOGI(EXAMPLE_TAG, "Driver started");
-    ESP_LOGI(EXAMPLE_TAG, "started receive task");
 
 
+    ESP_LOGI(EXAMPLE_TAG, "starting receive task");
     xTaskCreatePinnedToCore(can_receive_task, "CAN_rx", 4096, NULL, RX_TASK_PRIO, NULL, tskNO_AFFINITY);
+    ESP_LOGI(EXAMPLE_TAG, "starting transsmit task");
     xTaskCreatePinnedToCore(can_transmit_task, "CAN_tx", 4096, NULL, TX_TASK_PRIO, NULL, tskNO_AFFINITY);
 }
