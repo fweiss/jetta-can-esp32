@@ -25,8 +25,12 @@ static const can_timing_config_t t_config = CAN_TIMING_CONFIG_500KBITS();
 static const can_filter_config_t f_config = CAN_FILTER_CONFIG_ACCEPT_ALL();
 static const can_general_config_t g_config = CAN_GENERAL_CONFIG_DEFAULT(TX_GPIO_NUM, RX_GPIO_NUM, CAN_MODE_NORMAL);
 
-static can_message_t tach_message = {.identifier = 0x280, .data_length_code = 8,
-                                           .flags = CAN_MSG_FLAG_NONE, .data = {0, 0 , 10 , 10 ,0 ,0 ,0 ,0}};
+static can_message_t tach_message = {
+	.identifier = 0x280,
+	.data_length_code = 8,
+	.flags = CAN_MSG_FLAG_NONE,
+	.data = {0, 0 , 10 , 10 ,0 ,0 ,0 ,0}
+};
 
 /* --------------------------- Tasks and Functions -------------------------- */
 
